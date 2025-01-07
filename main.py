@@ -1,7 +1,22 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import json
 
 app = FastAPI()
+
+# Define allowed origins for CORS
+origins = [
+    "*",  # Allow all origins, change to specific origins if necessary
+]
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Load user data from a file
 with open("user_list.json", "r") as file:
